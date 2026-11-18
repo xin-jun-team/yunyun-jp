@@ -949,7 +949,7 @@
   /* ================= checkout ================= */
   function shipOptions(country, sub) {
     return (C.shipping || []).filter(function (m) { return !m.countries || m.countries.indexOf(country) >= 0; })
-      .map(function (m) { var cost = m.freeOver && sub >= m.freeOver ? 0 : m.cost; return { id: m.id, label: m.label, cost: cost, store: m.store }; });
+      .map(function (m) { var cost = m.freeOver && sub >= m.freeOver ? 0 : m.cost; return { id: m.id, label: m.label, cost: cost, store: m.store, map: m.map }; });
   }
   var chosenShip = LS.get('yy_ship', ''), cvsStore = '';
   function initCheckout() {
@@ -1026,7 +1026,7 @@
       return '<li><input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_' + o.id + '" value="' + o.id + '" class="shipping_method"' + (o.id === cur.id ? ' checked="checked"' : '') + '>' +
         '<label for="shipping_method_0_' + o.id + '">' + esc(o.label) + (o.cost ? ': ' + amt(o.cost) : '') + '</label></li>';
     }).join('') + '</ul>';
-    if (cur.store) html += '<p class="form-row yy-cvs-row"><label for="yy_cvs_store">取貨門市（店號／店名）&nbsp;<abbr class="required" title="必填">*</abbr></label><input type="text" class="input-text" id="yy_cvs_store" value="' + esc(cvsStore) + '"></p>';
+    if (cur.store) html += '<p class="form-row yy-cvs-row"><label for="yy_cvs_store">取貨門市（店號／店名）&nbsp;<abbr class="required" title="必填">*</abbr></label><input type="text" class="input-text" id="yy_cvs_store" value="' + esc(cvsStore) + '">' + (/^https:\/\//.test(cur.map || '') ? '<a class="yy-cvs-map" href="' + esc(cur.map) + '" target="_blank" rel="noopener">查詢門市店號 ›</a>' : '') + '</p>';
     return { html: html, cost: cur.cost, opt: cur };
   }
   function renderReview() {
@@ -1036,6 +1036,8 @@
       return '<tr class="cart_item"><td class="product-name"> ' + esc(itemTitle(i)) + '&nbsp; <strong class="product-quantity">×&nbsp;' + i.qty + '</strong> </td><td class="product-total"> ' + amt(i.qty * i.price) + ' </td></tr>';
     }).join('');
     t.querySelector('tfoot').innerHTML = r.rows.replace(/ <a href="#" class="woocommerce-remove-coupon"/g, ' <a href="#" class="woocommerce-remove-coupon"');
+    var isStore = !!(ship && ship.opt && ship.opt.store);   // 超商取貨：不用填地址（與原站一致）
+    ['postcode', 'state', 'city', 'address_1', 'address_2'].forEach(function (k) { var f = $('#billing_' + k + '_field'); if (f) f.style.display = isStore ? 'none' : ''; });
     t.onclick = function (e) { var rc = e.target.closest('.woocommerce-remove-coupon'); if (rc) { e.preventDefault(); removeCoupon(rc.dataset.coupon); renderReview(); } };
     return { sub: sub, ship: ship, r: r };
   }

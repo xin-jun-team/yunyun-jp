@@ -480,9 +480,10 @@ const NEW_ID_BASE = 900000;   // 後台新增的商品 ID 從 900001 起跳，�
 
 // 與前台 assets/yy-config.js 的 shipping 保持一致
 const SHIPPING = [
-  { id: 'cvs_711',    label: '7-ELEVEN 超商取貨',   cost: 60, freeOver: 3000, countries: ['TW'], store: true },
-  { id: 'cvs_family', label: '全家便利商店取貨',    cost: 60, freeOver: 3000, countries: ['TW'], store: true },
-  { id: 'sf_express', label: '順豐速運（運費到付）', cost: 0, countries: ['TW', 'HK', 'MO'] }
+  { id: 'cvs_711',    label: '超商取貨 7-ELEVEN｜滿三千免運', cost: 60, freeOver: 3000, countries: ['TW'], store: true, map: 'https://emap.pcsc.com.tw/' },
+  { id: 'cvs_family', label: '超商取貨 全家｜滿三千免運',     cost: 60, freeOver: 3000, countries: ['TW'], store: true, map: 'https://www.family.com.tw/Marketing/zh/Map' },
+  { id: 'sf_express', label: '順豐宅配 | 運費到付($95起)｜滿六千免運', cost: 0, countries: ['TW'] },
+  { id: 'sf_hkmo',    label: '順豐宅配 | 運費到付', cost: 0, countries: ['HK', 'MO'] }
 ];
 const PAYMENTS = { ry_ecpay_atm: 'ATM 虛擬帳號', stripe: '信用卡 / 簽帳金融卡', stripe_cc: '信用卡 / 簽帳金融卡', stripe_applepay: 'Apple Pay', stripe_googlepay: 'Google Pay' };
 const STATUSES = ['待付款', '處理中', '已出貨', '已完成', '已取消', '已退費'];
@@ -882,7 +883,7 @@ function apiPlaceOrder(q) {
     });
     disc = Math.min(disc, sub);
     // 3) 運費（以伺服器的運送設定計算）
-    const country = str(b.billing_country || 'TW', 3).toUpperCase();
+    const country = str((shipA && shipA.shipping_country) || b.billing_country || 'TW', 3).toUpperCase();   // 與前台一致：有填「運送到不同地址」就以收件國家為準
     const sm = SHIPPING.find(m => m.id === o.shipId && (!m.countries || m.countries.indexOf(country) >= 0));
     if (!sm) throw new Error('沒有適用於您地址的運送方式。');
     const cvsStore = str(o.cvsStore, 120);

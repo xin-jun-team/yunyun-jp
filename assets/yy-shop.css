@@ -14,6 +14,7 @@
 .yy-cvs-row{margin:10px 0 0 !important}
 .yy-cvs-row label{display:block;font-size:14px;margin-bottom:4px}
 .yy-cvs-row input{width:100%}
+.yy-cvs-row .yy-cvs-map{display:inline-block;margin-top:8px;font-size:13px;text-decoration:underline}
 .yy-payinfo p{line-height:1.8}
 /* my-account static forms */
 .yy-addr-form .form-row,.yy-acct-form .form-row{margin-bottom:14px}

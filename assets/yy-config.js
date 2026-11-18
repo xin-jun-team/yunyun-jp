@@ -8,9 +8,10 @@ window.YY_CONFIG = {
 
   // 運送方式（與「購物須知」一致）
   shipping: [
-    { id: 'cvs_711',    label: '7-ELEVEN 超商取貨', cost: 60, freeOver: 3000, countries: ['TW'], store: true },
-    { id: 'cvs_family', label: '全家便利商店取貨',  cost: 60, freeOver: 3000, countries: ['TW'], store: true },
-    { id: 'sf_express', label: '順豐速運（運費到付）', cost: 0, countries: ['TW', 'HK', 'MO'] }
+    { id: 'cvs_711',    label: '超商取貨 7-ELEVEN｜滿三千免運', cost: 60, freeOver: 3000, countries: ['TW'], store: true, map: 'https://emap.pcsc.com.tw/' },
+    { id: 'cvs_family', label: '超商取貨 全家｜滿三千免運',     cost: 60, freeOver: 3000, countries: ['TW'], store: true, map: 'https://www.family.com.tw/Marketing/zh/Map' },
+    { id: 'sf_express', label: '順豐宅配 | 運費到付($95起)｜滿六千免運', cost: 0, countries: ['TW'] },
+    { id: 'sf_hkmo',    label: '順豐宅配 | 運費到付', cost: 0, countries: ['HK', 'MO'] }
   ],
 
   // 折價券（有 gasUrl 時改由試算表「折價券」分頁管理）：{ 'CODE': { type: 'percent' | 'fixed', amount: 數字, min: 最低消費 } }
