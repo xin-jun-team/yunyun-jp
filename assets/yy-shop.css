@@ -1,0 +1,26 @@
+/* price filter (replaces WooCommerce block price-filter) */
+.yy-pf{padding:6px 0 4px}
+.yy-pf-track{position:relative;height:24px;margin:4px 0 14px}
+.yy-pf-track:before{content:"";position:absolute;left:0;right:0;top:10px;height:4px;border-radius:4px;background:#ead3da}
+.yy-pf-fill{position:absolute;top:10px;height:4px;border-radius:4px;background:#cf8ca0}
+.yy-pf-r{position:absolute;left:0;top:0;width:100%;height:24px;margin:0;background:none;pointer-events:none;-webkit-appearance:none;appearance:none}
+.yy-pf-r::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid #cf8ca0;cursor:pointer}
+.yy-pf-r::-moz-range-thumb{pointer-events:auto;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #cf8ca0;cursor:pointer}
+.yy-pf-r::-webkit-slider-runnable-track{background:none}
+.yy-pf-ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.yy-pf-amt{width:96px;padding:6px 8px !important;font-size:14px;text-align:center}
+.yy-pf-btn{margin-left:auto;padding:6px 16px !important}
+/* convenience-store pickup field in checkout shipping row */
+.yy-cvs-row{margin:10px 0 0 !important}
+.yy-cvs-row label{display:block;font-size:14px;margin-bottom:4px}
+.yy-cvs-row input{width:100%}
+.yy-payinfo p{line-height:1.8}
+/* my-account static forms */
+.yy-addr-form .form-row,.yy-acct-form .form-row{margin-bottom:14px}
+.yy-addr-form input,.yy-acct-form input{width:100%}
+.mse-input-error{border-color:#e2401c !important}
+
+/* 後台新增的商品（p/?id=） */
+#yy-np.yy-np-loading { min-height: 50vh; display: flex; align-items: center; justify-content: center; }
+#yy-np .yy-np-msg { color: #6d6d6d; font-size: 1rem; letter-spacing: .05em; }
+ul.products li.product.yy-new img { aspect-ratio: 1 / 1; object-fit: cover; }
